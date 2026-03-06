@@ -13,6 +13,7 @@ import Register from './pages/Register';
 import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import LotteryDetails from './pages/LotteryDetails';
+import Lotteries from './pages/Lotteries';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import AdminRegister from './pages/AdminRegister';
@@ -59,6 +60,7 @@ const App = () => {
               // </ProtectedRoute>
             } />
             <Route path="/lottery/:id" element={<LotteryDetails />} />
+            <Route path="/lotteries" element={<Lotteries />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             {/* Add more routes here */}
             <Route path="*" element={<Navigate to="/" />} />

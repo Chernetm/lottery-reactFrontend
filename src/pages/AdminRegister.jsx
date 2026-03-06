@@ -93,7 +93,7 @@ const AdminRegister = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                                 className="w-full bg-slate-800/50 border border-slate-700 focus:border-brand-primary rounded-xl py-3 pl-12 pr-4 outline-none transition text-white"
-                                placeholder="admin@megalotto.com"
+                                placeholder="admin@habeshalottery.com"
                             />
                         </div>
                     </div>

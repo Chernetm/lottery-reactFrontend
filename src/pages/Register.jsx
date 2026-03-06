@@ -53,7 +53,7 @@ const Register = () => {
             >
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-bold mb-2">Create Account</h2>
-                    <p className="text-slate-400">Join MegaLotto and start winning today</p>
+                    <p className="text-slate-400">Join habeshaLottery and start winning today</p>
                 </div>
 
                 {error && (

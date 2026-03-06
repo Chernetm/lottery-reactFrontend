@@ -23,9 +23,11 @@ const Navbar = () => {
     return (
         <nav className="glass-effect sticky top-0 z-50 px-6 py-4">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <Link to="/" className="text-2xl font-bold premium-text-gradient flex items-center gap-2">
-                    <Ticket className="text-brand-primary" />
-                    <span>MegaLotto</span>
+                <Link to="/" className="text-2xl font-bold premium-text-gradient flex items-center gap-2 tracking-tight">
+                    <div className="bg-brand-primary/20 p-1.5 rounded-lg">
+                        <Ticket className="text-brand-primary" size={24} />
+                    </div>
+                    <span>habeshaLottery</span>
                 </Link>
 
                 {/* Desktop Links */}

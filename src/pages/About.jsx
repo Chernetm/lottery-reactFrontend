@@ -14,7 +14,7 @@ const About = () => {
                     Redefining the <span className="premium-text-gradient">Lottery Experience</span>
                 </motion.h1>
                 <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-                    MegaLotto was founded with a single mission: to create the most transparent, fair, and rewarding lottery platform in the digital age.
+                    habeshaLottery was founded with a single mission: to create the most transparent, fair, and rewarding lottery platform in the digital age.
                 </p>
             </div>
 

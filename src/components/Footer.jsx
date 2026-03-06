@@ -7,9 +7,11 @@ const Footer = () => {
         <footer className="bg-slate-900 border-t border-slate-800 pt-16 pb-8 px-6 mt-auto">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div className="col-span-1 md:col-span-2">
-                    <Link to="/" className="text-2xl font-bold premium-text-gradient flex items-center gap-2 mb-4">
-                        <Ticket className="text-brand-primary" />
-                        <span>MegaLotto</span>
+                    <Link to="/" className="text-2xl font-bold premium-text-gradient flex items-center gap-2 mb-6">
+                        <div className="bg-brand-primary/20 p-1.5 rounded-lg text-brand-primary">
+                            <Ticket size={24} />
+                        </div>
+                        <span>habeshaLottery</span>
                     </Link>
                     <p className="text-slate-400 max-w-sm mb-6">
                         The world's most transparent and provably fair lottery platform. Join thousands of winners and try your luck today!
@@ -49,7 +51,7 @@ const Footer = () => {
             </div>
 
             <div className="max-w-7xl mx-auto pt-8 border-t border-slate-800 flex flex-col md:row justify-between items-center gap-4 text-slate-500 text-sm">
-                <p>© 2026 MegaLotto. All rights reserved.</p>
+                <p>© 2026 habeshaLottery. All rights reserved.</p>
                 <p>Made with ❤️ for winners everywhere.</p>
             </div>
         </footer>

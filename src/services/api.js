@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+// https://lottery-gobackend.onrender.com/api
+//http://localhost:5000/api
 const api = axios.create({
     baseURL: 'https://lottery-gobackend.onrender.com/api',
 });
