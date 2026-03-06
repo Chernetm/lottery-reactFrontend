@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock, LogIn, ShieldAlert, ArrowRight } from 'lucide-react';
+import { Phone, Lock, LogIn, ShieldAlert, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const [email, setEmail] = useState('');
+    const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -18,9 +18,19 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+
+        // Phone number validation (if it starts with 0)
+        if (identifier.startsWith('0')) {
+            const phoneRegex = /^0\d{9}$/;
+            if (!phoneRegex.test(identifier)) {
+                setError('Phone number must be exactly 10 digits (e.g., 0912345678)');
+                return;
+            }
+        }
+
         setLoading(true);
         try {
-            await login(email, password, type);
+            await login(identifier, password, type);
             navigate(type === 'admin' ? '/admin' : '/dashboard');
         } catch (err) {
             setError(err.response?.data?.error || 'Login failed. Please check your credentials.');
@@ -56,16 +66,16 @@ const Login = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-300 ml-1">Email Address</label>
+                        <label className="text-sm font-medium text-slate-300 ml-1">Phone Number / Email</label>
                         <div className="relative">
-                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
+                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
                             <input
-                                type="email"
+                                type="text"
                                 required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="w-full bg-slate-800/50 border border-slate-700 focus:border-brand-primary rounded-xl py-3 pl-12 pr-4 outline-none transition"
-                                placeholder="name@example.com"
+                                value={identifier}
+                                onChange={(e) => setIdentifier(e.target.value)}
+                                className="w-full bg-slate-800/50 border border-slate-700 focus:border-brand-primary rounded-xl py-3 pl-12 pr-4 outline-none transition text-white"
+                                placeholder="0911223344 or email@example.com"
                             />
                         </div>
                     </div>

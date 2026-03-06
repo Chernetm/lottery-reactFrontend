@@ -29,10 +29,10 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const login = async (email, password, type = 'user') => {
+    const login = async (identifier, password, type = 'user') => {
         const data = type === 'admin'
-            ? await adminLoginService({ email, password })
-            : await userLoginService({ email, password });
+            ? await adminLoginService({ email: identifier, password })
+            : await userLoginService({ email: identifier, password });
 
         localStorage.setItem('token', data.token);
         const role = data.admin ? 'ADMIN' : 'USER';

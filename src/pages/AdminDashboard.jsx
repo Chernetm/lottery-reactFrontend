@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { getAdminProfile, changePassword } from '../api/auth';
-import { createItem, updateLotteryStatus, getAdminStats, updateLottery, deleteItem, getAllTickets, updateTicketStatus, drawWinner } from '../api/admin';
+import { createItem, updateLotteryStatus, getAdminStats, updateLottery, deleteItem, getAllTickets, updateTicketStatus, drawWinner, getAllUsers, giftFreeTicket } from '../api/admin';
 import { getAllLotteries, getLotteryItems, createLottery } from '../api/lottery';
 import { getAllWithdrawals, updateWithdrawalStatus } from '../api/withdrawal';
 import {
@@ -35,6 +35,7 @@ const AdminDashboard = () => {
     const [lotteries, setLotteries] = useState([]);
     const [tickets, setTickets] = useState([]);
     const [withdrawals, setWithdrawals] = useState([]);
+    const [users, setUsers] = useState([]);
     const [admin, setAdmin] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState('stats');
@@ -47,6 +48,13 @@ const AdminDashboard = () => {
         winner: null,
         currentSelection: null,
         showResult: false,
+    });
+    const [giftModal, setGiftModal] = useState({
+        isOpen: false,
+        lotteryId: null,
+        selectedUserId: '',
+        generatedCoupon: '',
+        loading: false
     });
 
     // Form states
@@ -85,13 +93,14 @@ const AdminDashboard = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const [statsRes, itemsRes, lotteriesRes, ticketsRes, profileRes, withdrawalsRes] = await Promise.all([
+            const [statsRes, itemsRes, lotteriesRes, ticketsRes, profileRes, withdrawalsRes, usersRes] = await Promise.all([
                 getAdminStats(),
                 getLotteryItems(),
                 getAllLotteries(),
                 getAllTickets(),
                 getAdminProfile(),
                 getAllWithdrawals(),
+                getAllUsers(),
             ]);
             setStats(statsRes);
             setItems(itemsRes);
@@ -99,6 +108,7 @@ const AdminDashboard = () => {
             setTickets(ticketsRes);
             setAdmin(profileRes);
             setWithdrawals(withdrawalsRes);
+            setUsers(usersRes);
         } catch (error) {
             console.error('Failed to fetch admin data', error);
         } finally {
@@ -240,6 +250,18 @@ const AdminDashboard = () => {
             setWithdrawals(withdrawalsRes);
         } catch (error) {
             console.error('Failed to update withdrawal status', error);
+        }
+    };
+
+    const handleGiftCoupon = async (e) => {
+        e.preventDefault();
+        setGiftModal(prev => ({ ...prev, loading: true }));
+        try {
+            const response = await giftFreeTicket(giftModal.selectedUserId, giftModal.lotteryId);
+            setGiftModal(prev => ({ ...prev, generatedCoupon: response.code, loading: false }));
+        } catch (error) {
+            alert(error.response?.data?.error || 'Failed to gift coupon');
+            setGiftModal(prev => ({ ...prev, loading: false }));
         }
     };
 
@@ -538,6 +560,15 @@ const AdminDashboard = () => {
                                                 <Play size={20} /> Trigger Winner Draw
                                             </button>
                                         )}
+                                        {lottery.status === 'ACTIVE' && (
+                                            <button
+                                                onClick={() => setGiftModal({ isOpen: true, lotteryId: lottery.id, selectedUserId: '', generatedCoupon: '', loading: false })}
+                                                className="px-6 bg-brand-primary/10 text-brand-primary py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-brand-primary/20 transition"
+                                                title="Gift Free Ticket Coupon"
+                                            >
+                                                <Send size={20} /> Gift
+                                            </button>
+                                        )}
                                         {lottery.totalTickets < lottery.minTickets && (
                                             <div className="flex items-center gap-2 text-brand-accent text-sm font-medium">
                                                 <AlertCircle size={18} /> Needs {lottery.minTickets - lottery.totalTickets} more tickets to draw
@@ -793,6 +824,95 @@ const AdminDashboard = () => {
                             </div>
                         </div>
                     </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Gift Coupon Modal */}
+            <AnimatePresence>
+                {giftModal.isOpen && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center px-6">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setGiftModal({ ...giftModal, isOpen: false })}
+                            className="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"
+                        />
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                            animate={{ scale: 1, opacity: 1, y: 0 }}
+                            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                            className="relative w-full max-w-lg glass-effect p-8 rounded-3xl border border-slate-700 shadow-2xl"
+                        >
+                            <button
+                                onClick={() => setGiftModal({ ...giftModal, isOpen: false })}
+                                className="absolute top-6 right-6 p-2 text-slate-400 hover:text-white transition"
+                            >
+                                <X size={24} />
+                            </button>
+
+                            <div className="text-center mb-8">
+                                <div className="w-16 h-16 bg-brand-primary/10 text-brand-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                    <Send size={32} />
+                                </div>
+                                <h3 className="text-2xl font-bold">Gift Free Ticket</h3>
+                                <p className="text-slate-500">Generate a free ticket coupon for a specific user</p>
+                            </div>
+
+                            {giftModal.generatedCoupon ? (
+                                <div className="space-y-6">
+                                    <div className="bg-green-500/10 border border-green-500/30 p-6 rounded-2xl text-center">
+                                        <p className="text-xs text-green-500 font-bold uppercase tracking-widest mb-2">Coupon Generated!</p>
+                                        <p className="text-3xl font-mono font-black text-white tracking-wider">
+                                            {giftModal.generatedCoupon}
+                                        </p>
+                                    </div>
+                                    <p className="text-slate-400 text-sm text-center">
+                                        Send this code to the user. They can redeem it on the lottery checkout page.
+                                    </p>
+                                    <button
+                                        onClick={() => setGiftModal({ ...giftModal, isOpen: false })}
+                                        className="w-full py-4 bg-slate-800 hover:bg-slate-700 rounded-xl font-bold transition"
+                                    >
+                                        Close
+                                    </button>
+                                </div>
+                            ) : (
+                                <form onSubmit={handleGiftCoupon} className="space-y-6">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-bold text-slate-400 ml-1">Select User</label>
+                                        <select
+                                            className="w-full bg-slate-800/50 border border-slate-700 rounded-xl py-4 px-4 outline-none focus:border-brand-primary transition text-white appearance-none"
+                                            value={giftModal.selectedUserId}
+                                            onChange={(e) => setGiftModal({ ...giftModal, selectedUserId: e.target.value })}
+                                            required
+                                        >
+                                            <option value="">-- Choose a user --</option>
+                                            {users.map(u => (
+                                                <option key={u.id} value={u.id}>
+                                                    {u.fullName || 'No Name'} ({u.email || u.phoneNumber})
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    <button
+                                        type="submit"
+                                        disabled={giftModal.loading || !giftModal.selectedUserId}
+                                        className="w-full premium-gradient py-4 rounded-2xl font-bold text-white shadow-xl shadow-brand-primary/20 hover:scale-[1.02] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                                    >
+                                        {giftModal.loading ? (
+                                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                                        ) : (
+                                            <>
+                                                <Plus size={20} /> Generate Free Coupon
+                                            </>
+                                        )}
+                                    </button>
+                                </form>
+                            )}
+                        </motion.div>
+                    </div>
                 )}
             </AnimatePresence>
 

@@ -19,6 +19,14 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+
+        // Phone number validation
+        const phoneRegex = /^0\d{9}$/;
+        if (!phoneRegex.test(formData.phoneNumber)) {
+            setError('Phone number must start with 0 and be exactly 10 digits (e.g., 0912345678)');
+            return;
+        }
+
         setLoading(true);
         try {
             await api.post('/auth/register', formData);
@@ -79,7 +87,6 @@ const Register = () => {
                             <input
                                 type="email"
                                 name="email"
-                                required
                                 value={formData.email}
                                 onChange={handleChange}
                                 className="w-full bg-slate-800/50 border border-slate-700 focus:border-brand-primary rounded-xl py-3 pl-12 pr-4 outline-none transition"
@@ -99,7 +106,7 @@ const Register = () => {
                                 value={formData.phoneNumber}
                                 onChange={handleChange}
                                 className="w-full bg-slate-800/50 border border-slate-700 focus:border-brand-primary rounded-xl py-3 pl-12 pr-4 outline-none transition"
-                                placeholder="+1 234 567 8900"
+                                placeholder="0912345678"
                             />
                         </div>
                     </div>

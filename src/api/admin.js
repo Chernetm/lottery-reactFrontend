@@ -39,3 +39,13 @@ export const getAdminStats = async () => {
     const response = await api.get('/admin/stats');
     return response.data;
 };
+
+export const getAllUsers = async () => {
+    const response = await api.get('/admin/users');
+    return response.data;
+};
+
+export const giftFreeTicket = async (userId, lotteryId) => {
+    const response = await api.post('/admin/coupons/gift', { userId, lotteryId });
+    return response.data;
+};

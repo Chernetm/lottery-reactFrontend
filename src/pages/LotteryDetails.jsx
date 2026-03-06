@@ -30,6 +30,7 @@ const LotteryDetails = () => {
     const [animationComplete, setAnimationComplete] = useState(false);
 
     // To handle the animation for "first seen" drawn lottery
+    const [couponCode, setCouponCode] = useState('');
     const [revealTicketData, setRevealTicketData] = useState(null);
 
     useEffect(() => {
@@ -86,7 +87,8 @@ const LotteryDetails = () => {
         try {
             const response = await purchaseTicket({
                 lotteryId: parseInt(id),
-                quantity: quantity
+                quantity: quantity,
+                couponCode: couponCode
             });
 
             if (response.checkoutUrl) {
@@ -314,6 +316,20 @@ const LotteryDetails = () => {
                                                 <p className="text-xs text-slate-500 flex items-center gap-1.5 ml-1">
                                                     <Info size={14} /> Maximum tickets per purchase: 50
                                                 </p>
+                                            </div>
+
+                                            <div className="space-y-4">
+                                                <label className="text-sm font-bold text-slate-300 ml-1">Have a coupon?</label>
+                                                <div className="relative">
+                                                    <Ticket className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 rotate-45" size={18} />
+                                                    <input
+                                                        type="text"
+                                                        value={couponCode}
+                                                        onChange={(e) => setCouponCode(e.target.value)}
+                                                        className="w-full bg-slate-800/50 border border-slate-700 focus:border-brand-primary rounded-xl py-4 pl-12 pr-4 outline-none transition text-white"
+                                                        placeholder="Enter FREE coupon code"
+                                                    />
+                                                </div>
                                             </div>
 
                                             <div className="pt-6 border-t border-slate-800">

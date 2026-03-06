@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { adminRegister } from '../api/auth';
-import { Mail, Lock, User, UserPlus, ShieldAlert, Key } from 'lucide-react';
+import { Mail, Lock, User, UserPlus, ShieldAlert, Key, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const AdminRegister = () => {
@@ -9,6 +9,7 @@ const AdminRegister = () => {
     const [formData, setFormData] = useState({
         fullName: '',
         email: '',
+        phoneNumber: '',
         password: '',
     });
     const [error, setError] = useState('');
@@ -17,6 +18,14 @@ const AdminRegister = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+
+        // Phone number validation
+        const phoneRegex = /^0\d{9}$/;
+        if (!phoneRegex.test(formData.phoneNumber)) {
+            setError('Phone number must start with 0 and be exactly 10 digits (e.g., 0912345678)');
+            return;
+        }
+
         setLoading(true);
         try {
             await adminRegister(formData);
@@ -85,6 +94,22 @@ const AdminRegister = () => {
                                 onChange={handleChange}
                                 className="w-full bg-slate-800/50 border border-slate-700 focus:border-brand-primary rounded-xl py-3 pl-12 pr-4 outline-none transition text-white"
                                 placeholder="admin@megalotto.com"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium text-slate-300 ml-1">Phone Number</label>
+                        <div className="relative">
+                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
+                            <input
+                                type="text"
+                                name="phoneNumber"
+                                required
+                                value={formData.phoneNumber}
+                                onChange={handleChange}
+                                className="w-full bg-slate-800/50 border border-slate-700 focus:border-brand-primary rounded-xl py-3 pl-12 pr-4 outline-none transition text-white"
+                                placeholder="0912345678"
                             />
                         </div>
                     </div>
