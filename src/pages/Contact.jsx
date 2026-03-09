@@ -4,44 +4,44 @@ import { motion } from 'framer-motion';
 
 const Contact = () => {
     return (
-        <div className="bg-slate-50 min-h-[80vh] text-slate-900">
-            <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-24">
-                <div className="max-w-3xl mx-auto">
-                    <div className="text-center mb-12 md:mb-16">
-                        <h1 className="text-3xl md:text-5xl font-extrabold mb-4 md:mb-8"><span className="premium-text-gradient">ያግኙን</span></h1>
-                        <p className="text-slate-600 text-base md:text-lg">
-                            Have questions about a draw, your account, or how to buy tickets? Our support team is here to help you 24/7.
+        <div className="min-h-[80vh]">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-24 bg-white">
+                <div className="max-w-4xl mx-auto">
+                    <div className="text-center mb-20">
+                        <h1 className="text-3xl md:text-6xl font-black mb-6 text-ethio-blue uppercase tracking-tighter">Contact <span className="text-ethio-gold underline decoration-4 underline-offset-8">Support</span></h1>
+                        <p className="text-slate-500 text-lg md:text-xl font-bold uppercase text-xs tracking-widest">
+                            We're here to help you 24/7.
                         </p>
                     </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-                        <div className="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-6 md:p-8 rounded-3xl text-center flex flex-col items-center gap-3 md:gap-4 transition-transform hover:-translate-y-1">
-                            <div className="p-4 bg-brand-primary/10 text-brand-primary rounded-2xl">
-                                <Mail size={24} />
+ 
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                        <div className="bg-ethio-light border border-slate-100 p-10 rounded-[2.5rem] text-center flex flex-col items-center gap-6 shadow-xl shadow-ethio-blue/5 group hover:-translate-y-2 transition-all">
+                            <div className="p-6 bg-white text-ethio-blue rounded-[2rem] shadow-lg group-hover:bg-ethio-blue group-hover:text-white transition-all">
+                                <Mail size={32} />
                             </div>
                             <div>
-                                <p className="text-slate-500 text-xs md:text-sm font-medium mb-1">Email Us</p>
-                                <p className="text-base md:text-lg font-bold text-slate-900">ethiodigitallottory@gmail.com</p>
+                                <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2">Email Support</p>
+                                <p className="text-lg font-black text-ethio-blue truncate w-full max-w-[200px]">support@ethiodigitallotto.com</p>
                             </div>
                         </div>
-
-                        <div className="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-6 md:p-8 rounded-3xl text-center flex flex-col items-center gap-3 md:gap-4 transition-transform hover:-translate-y-1">
-                            <div className="p-4 bg-brand-primary/10 text-brand-primary rounded-2xl">
-                                <Phone size={24} />
+ 
+                        <div className="bg-ethio-light border border-slate-100 p-10 rounded-[2.5rem] text-center flex flex-col items-center gap-6 shadow-xl shadow-ethio-blue/5 group hover:-translate-y-2 transition-all">
+                            <div className="p-6 bg-white text-ethio-blue rounded-[2rem] shadow-lg group-hover:bg-ethio-blue group-hover:text-white transition-all">
+                                <Phone size={32} />
                             </div>
                             <div>
-                                <p className="text-slate-500 text-xs md:text-sm font-medium mb-1">Call Us</p>
-                                <p className="text-base md:text-lg font-bold text-slate-900">+251 96 931 2020</p>
+                                <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2">Call Center</p>
+                                <p className="text-xl font-black text-ethio-blue">+251 111 22 33 44</p>
                             </div>
                         </div>
-
-                        <div className="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-6 md:p-8 rounded-3xl text-center flex flex-col items-center gap-3 md:gap-4 transition-transform hover:-translate-y-1 sm:col-span-2 md:col-span-1">
-                            <div className="p-4 bg-brand-primary/10 text-brand-primary rounded-2xl">
-                                <MapPin size={24} />
+ 
+                        <div className="bg-ethio-light border border-slate-100 p-10 rounded-[2.5rem] text-center flex flex-col items-center gap-6 shadow-xl shadow-ethio-blue/5 group hover:-translate-y-2 transition-all">
+                            <div className="p-6 bg-white text-ethio-blue rounded-[2rem] shadow-lg group-hover:bg-ethio-blue group-hover:text-white transition-all">
+                                <MapPin size={32} />
                             </div>
                             <div>
-                                <p className="text-slate-500 text-xs md:text-sm font-medium mb-1">Visit Us</p>
-                                <p className="text-base md:text-lg font-bold text-slate-900">Addis Ababa, Ethiopia</p>
+                                <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest mb-2">Office Location</p>
+                                <p className="text-xl font-black text-ethio-blue">Addis Ababa, Ethiopia</p>
                             </div>
                         </div>
                     </div>

@@ -103,7 +103,7 @@ const UserDashboard = () => {
 
 
     return (
-        <div className="bg-slate-50 min-h-screen">
+        <div className="min-h-screen">
             <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
                 <AnimatePresence>
                     {showDrawAnimation && animatingTicket && (
@@ -116,19 +116,19 @@ const UserDashboard = () => {
                 </AnimatePresence>
                 <div className="mb-8 md:mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
                     <div>
-                        <h1 className="text-3xl md:text-4xl font-extrabold mb-1 md:mb-2 text-slate-900">Hello, {user.fullName}!</h1>
-                        <p className="text-slate-500 text-sm md:text-base">Track your lucky tickets and winnings here.</p>
+                        <h1 className="text-3xl md:text-4xl font-extrabold mb-1 md:mb-2 text-white">Hello, {user.fullName}!</h1>
+                        <p className="text-slate-400 text-sm md:text-base">Track your lucky tickets and winnings here.</p>
                     </div>
-                    <div className="flex bg-white p-1.5 rounded-2xl border border-slate-200 w-full md:w-auto shadow-sm overflow-x-auto">
+                    <div className="flex bg-slate-800/50 p-1.5 rounded-2xl border border-slate-700 w-full md:w-auto shadow-sm overflow-x-auto">
                         <button
                             onClick={() => setActiveTab('overview')}
-                            className={`px-6 py-2 rounded-xl font-bold text-sm md:text-base transition whitespace-nowrap ${activeTab === 'overview' ? 'bg-brand-primary text-white shadow-md shadow-brand-primary/20' : 'text-slate-500 hover:text-slate-900'}`}
+                            className={`px-6 py-2 rounded-xl font-bold text-sm md:text-base transition whitespace-nowrap ${activeTab === 'overview' ? 'bg-brand-primary text-white shadow-md shadow-brand-primary/20' : 'text-slate-400 hover:text-white'}`}
                         >
                             Overview
                         </button>
                         <button
                             onClick={() => setActiveTab('profile')}
-                            className={`px-6 py-2 rounded-xl font-bold text-sm md:text-base transition whitespace-nowrap ${activeTab === 'profile' ? 'bg-brand-primary text-white shadow-md shadow-brand-primary/20' : 'text-slate-500 hover:text-slate-900'}`}
+                            className={`px-6 py-2 rounded-xl font-bold text-sm md:text-base transition whitespace-nowrap ${activeTab === 'profile' ? 'bg-brand-primary text-white shadow-md shadow-brand-primary/20' : 'text-slate-400 hover:text-white'}`}
                         >
                             Profile
                         </button>

@@ -7,6 +7,9 @@
   --color-dark-bg: #0f172a;
   --color-dark-surface: #1e293b;
   --color-dark-border: #334155;
+  --color-ethio-blue: #002244;
+  --color-ethio-gold: #DEB887;
+  --color-ethio-light: #f8fafc;
 }
 
 :root {
@@ -14,9 +17,9 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: dark;
-  color: #f1f5f9;
-  background-color: #0f172a;
+  color-scheme: light dark;
+  color: #1e293b;
+  background-color: #f8fafc;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

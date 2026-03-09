@@ -5,8 +5,11 @@ import { getAllLotteries } from '../api/lottery';
 import { Link } from 'react-router-dom';
 
 const Lotteries = () => {
-    const [activeLotteries, setActiveLotteries] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [activeLotteries, setActiveLotteries] = useState(() => {
+        const cached = localStorage.getItem('active_lotteries');
+        return cached ? JSON.parse(cached) : [];
+    });
+    const [loading, setLoading] = useState(!activeLotteries.length);
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
@@ -14,6 +17,7 @@ const Lotteries = () => {
             try {
                 const data = await getAllLotteries('ACTIVE');
                 setActiveLotteries(data);
+                localStorage.setItem('active_lotteries', JSON.stringify(data));
             } catch (error) {
                 console.error('Failed to fetch lotteries', error);
             } finally {

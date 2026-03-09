@@ -16,6 +16,7 @@ import LotteryDetails from './pages/LotteryDetails';
 import Lotteries from './pages/Lotteries';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Winners from './pages/Winners';
 import AdminRegister from './pages/AdminRegister';
 import PaymentSuccess from './pages/PaymentSuccess';
 import Tickets from './pages/Tickets';
@@ -61,6 +62,7 @@ const App = () => {
             } />
             <Route path="/lottery/:id" element={<LotteryDetails />} />
             <Route path="/lotteries" element={<Lotteries />} />
+            <Route path="/winners" element={<Winners />} />
             <Route path="/payment-success" element={<PaymentSuccess />} />
             {/* Add more routes here */}
             <Route path="*" element={<Navigate to="/" />} />

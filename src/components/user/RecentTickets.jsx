@@ -5,37 +5,37 @@ const RecentTickets = ({ stats, handleReveal, spinningId }) => {
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
-                <h2 className="text-2xl text-yellow-900 font-bold">Recent Tickets</h2>
+                <h2 className="text-2xl text-white font-bold">Recent Tickets</h2>
             </div>
 
-            <div className="bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 rounded-3xl overflow-hidden">
+            <div className="glass-effect rounded-3xl overflow-hidden border border-slate-700">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left border-collapse">
-                        <thead className="bg-slate-50 border-b border-slate-100">
+                        <thead className="bg-slate-800/50 border-b border-slate-700">
                             <tr>
                                 <th className="px-6 py-4 text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest">Lottery</th>
                                 <th className="px-6 py-4 text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest text-center">Ticket #</th>
                                 <th className="px-6 py-4 text-[10px] md:text-xs font-bold text-slate-500 uppercase tracking-widest text-right">Status</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-50">
+                        <tbody className="divide-y divide-slate-700">
                             {stats.recentTickets.length > 0 ? (
                                 stats.recentTickets.map((ticket) => (
-                                    <tr key={ticket.id} className="hover:bg-slate-50/50 transition-colors group">
+                                    <tr key={ticket.id} className="hover:bg-slate-800/30 transition-colors group">
                                         <td className="px-6 py-5">
-                                            <div className="font-bold text-slate-900 text-sm md:text-base group-hover:text-brand-primary transition-colors">{ticket.lottery.item.name}</div>
-                                            <div className="text-[10px] font-medium text-slate-400">ID: #{ticket.lottery.id}</div>
+                                            <div className="font-bold text-white text-sm md:text-base group-hover:text-brand-primary transition-colors">{ticket.lottery.item.name}</div>
+                                            <div className="text-[10px] font-medium text-slate-500">ID: #{ticket.lottery.id}</div>
                                         </td>
-                                        <td className="px-6 py-5 font-mono text-slate-600 text-xs md:text-sm text-center bg-slate-50/30 font-semibold">{ticket.ticketNumber}</td>
+                                        <td className="px-6 py-5 font-mono text-slate-300 text-xs md:text-sm text-center bg-slate-800/10 font-semibold">{ticket.ticketNumber}</td>
                                         <td className="px-6 py-5 text-right">
                                             {ticket.lottery.status === 'DRAWN' ? (
                                                 ticket.isRevealed ? (
                                                     ticket.status === 'WON' ? (
-                                                        <span className="bg-green-50 text-green-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider whitespace-nowrap border border-green-100">
+                                                        <span className="bg-green-500/10 text-green-400 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider whitespace-nowrap border border-green-500/20">
                                                             WON
                                                         </span>
                                                     ) : (
-                                                        <span className="bg-slate-100 text-slate-400 px-3 py-1 rounded-full text-[10px] font-bold uppercase whitespace-nowrap">LOST</span>
+                                                        <span className="bg-slate-800 text-slate-500 px-3 py-1 rounded-full text-[10px] font-bold uppercase whitespace-nowrap border border-slate-700">LOST</span>
                                                     )
                                                 ) : (
                                                     <button
