@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Phone, Lock, LogIn, ShieldAlert, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 const Login = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const [searchParams] = useSearchParams();
     const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
@@ -28,10 +29,10 @@ const Login = () => {
             }
         }
 
-        setLoading(true);
         try {
             await login(identifier, password, type);
-            navigate(type === 'admin' ? '/admin' : '/dashboard');
+            const redirectPath = searchParams.get('redirect') || (location.state?.from) || (type === 'admin' ? '/admin' : '/dashboard');
+            navigate(redirectPath);
         } catch (err) {
             setError(err.response?.data?.error || 'Login failed. Please check your credentials.');
         } finally {

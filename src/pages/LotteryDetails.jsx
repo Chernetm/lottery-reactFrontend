@@ -78,7 +78,7 @@ const LotteryDetails = () => {
 
     const handlePurchase = async () => {
         if (!user) {
-            navigate('/login');
+            navigate('/login', { state: { from: window.location.pathname } });
             return;
         }
 

@@ -47,7 +47,7 @@ const DrawAnimation = ({ lottery, ticket, onFinish }) => {
         for (let i = 0; i < targetLostCount; i++) {
             lostSegments.push({
                 id: `lost-${i}`,
-                name: 'No Prize',
+                name: 'Better luck next time',
                 color: i % 2 === 0 ? '#1E293B' : '#0F172A',
                 isWin: false
             });
@@ -230,7 +230,7 @@ const DrawAnimation = ({ lottery, ticket, onFinish }) => {
                                     </div>
                                 ) : (
                                     <div className="glass-effect p-8 rounded-3xl border border-slate-700 bg-slate-800/30">
-                                        <h3 className="text-2xl font-bold mb-2 text-slate-300">Hard Luck!</h3>
+                                        <h3 className="text-2xl font-bold mb-2 text-slate-300">Better luck next time!</h3>
                                         <p className="text-slate-500">You didn't win this time, but there's always a next chance!</p>
                                     </div>
                                 )}

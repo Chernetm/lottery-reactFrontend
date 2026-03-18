@@ -35,7 +35,7 @@ const RecentTickets = ({ stats, handleReveal, spinningId }) => {
                                                             WON
                                                         </span>
                                                     ) : (
-                                                        <span className="bg-slate-800 text-slate-500 px-3 py-1 rounded-full text-[10px] font-bold uppercase whitespace-nowrap border border-slate-700">LOST</span>
+                                                        <span className="bg-slate-800 text-slate-500 px-3 py-1 rounded-full text-[10px] font-bold uppercase whitespace-nowrap border border-slate-700">Better luck next time</span>
                                                     )
                                                 ) : (
                                                     <button
